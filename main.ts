@@ -184,6 +184,26 @@ namespace wuKong {
         setMotorSpeed(MotorList.M2, 0)
     }
 
+    export function turnLeft(speed: number): void {
+        setMotorSpeed(MotorList.M1, 0)
+        setMotorSpeed(MotorList.M2, speed)
+    }
+
+    export function turnRight(speed: number): void {
+        setMotorSpeed(MotorList.M1, speed)
+        setMotorSpeed(MotorList.M2, 0)
+    }
+
+    export function goForward(speed: number): void {
+        setMotorSpeed(MotorList.M1, speed)
+        setMotorSpeed(MotorList.M2, speed)
+    }
+
+    export function goBackward(speed: number): void {
+        setMotorSpeed(MotorList.M1, -speed)
+        setMotorSpeed(MotorList.M2, -speed)
+    }
+
     /*
      * TODO: Setting the angle of a servo motor. 
      * @param servo A servo in the ServoList , eg: ServoList.S1
