@@ -151,6 +151,7 @@ namespace PI {
 
     //% weight=82
     //% blockId=followLine  block="follow line set to %boo with speed %speed"
+    //% speed.min=0 speed.max=100
     export function followLine(boo: Boo, speed: number): void {
         if (pins.digitalReadPin(DigitalPin.P1) == 0 && pins.digitalReadPin(DigitalPin.P15) == 0) {
             goForward(speed)
