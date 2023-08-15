@@ -13,6 +13,13 @@ namespace PI {
         //% block="OFF"
         OFF
     }
+
+    export enum Boo {
+        //% block="True"
+        T,
+        //% block="False
+        F
+    }
     /**
     * MotorList
     */
@@ -140,5 +147,20 @@ namespace PI {
     export function goBackward(speed: number): void {
         setMotorSpeed(MotorList.M1, -speed)
         setMotorSpeed(MotorList.M2, -speed)
+    }
+
+    //% weight=82
+    //% blockId=followLine  block="follow line set to %boo with speed %speed"
+    export function followLine(boo: Boo, speed: number): void {
+        if (pins.digitalReadPin(DigitalPin.P1) == 0 && pins.digitalReadPin(DigitalPin.P15) == 0) {
+            goForward(speed)
+        } else if (pins.digitalReadPin(DigitalPin.P1) == 0 && pins.digitalReadPin(DigitalPin.P15) == 1) {
+            turnRight(speed)
+        } else if (pins.digitalReadPin(DigitalPin.P1) == 1 && pins.digitalReadPin(DigitalPin.P15) == 0) {
+            turnLeft(speed)
+        } else if (pins.digitalReadPin(DigitalPin.P1) == 1 && pins.digitalReadPin(DigitalPin.P15) == 1) {
+            setMotorSpeed(MotorList.M1, -speed)
+            setMotorSpeed(MotorList.M2, speed)
+        }
     }
 }
