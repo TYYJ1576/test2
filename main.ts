@@ -264,10 +264,10 @@ namespace PI {
     }
 
     //% weight=79
-    //% blockId=autoGrab  block="auto grab set to %boo within distance %distance at pin %"
+    //% blockId=autoGrab  block="auto grab set to %boo within distance %distance sensor |at|pin %pin"
     //% distance.min=0 distance.max=100
-    export function autoGrab(boo: Boo, distance: number, ): void{
-        if (sonarbit_distance(Distance_Unit.Distance_Unit_mm, DigitalPin.P0) < 10) {
+    export function autoGrab(boo: Boo, distance: number, pin: DigitalPin): void{
+        if (sonarbit_distance(Distance_Unit.Distance_Unit_cm, pin) < 10) {
             setServoAngle(ServoTypeList._180, ServoList.S0, 0)
         }
     }
