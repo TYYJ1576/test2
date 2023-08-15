@@ -184,21 +184,33 @@ namespace wuKong {
         setMotorSpeed(MotorList.M2, 0)
     }
 
+    //% weight=84
+    //% blockId=turnLeft  block="turn left with speed %speed"
+    //% speed.min=-100 speed.max=100
     export function turnLeft(speed: number): void {
         setMotorSpeed(MotorList.M1, 0)
         setMotorSpeed(MotorList.M2, speed)
     }
 
+    //% weight=83
+    //% blockId=turnRight  block="turn right with speed %speed"
+    //% speed.min=-100 speed.max=100
     export function turnRight(speed: number): void {
         setMotorSpeed(MotorList.M1, speed)
         setMotorSpeed(MotorList.M2, 0)
     }
 
+    //% weight=82
+    //% blockId=goForward  block="go forward with speed %speed"
+    //% speed.min=-100 speed.max=100
     export function goForward(speed: number): void {
         setMotorSpeed(MotorList.M1, speed)
         setMotorSpeed(MotorList.M2, speed)
     }
 
+    //% weight=81
+    //% blockId=goBack  block="go Backward with speed %speed"
+    //% speed.min=-100 speed.max=100
     export function goBackward(speed: number): void {
         setMotorSpeed(MotorList.M1, -speed)
         setMotorSpeed(MotorList.M2, -speed)
@@ -209,9 +221,6 @@ namespace wuKong {
      * @param servo A servo in the ServoList , eg: ServoList.S1
      * @param angel Angle of servo motor , eg: 90
      */
-    //% weight=84
-    //% blockId=setServoAngle block="Set %servoType servo %servo angle to %angle"
-    //% angle.min=0 angle.max=360
     export function setServoAngle(servoType: ServoTypeList, servo: ServoList, angle: number): void {
         let buf = pins.createBuffer(4);
         if (servo == 0) {
