@@ -1,6 +1,17 @@
 /**
 * Functions to WuKong multifunctional expansion board by ELECFREAKS Co.,Ltd.
 */
+enum Distance_Unit {
+    //% block="mm" enumval=0
+    Distance_Unit_mm,
+
+    //% block="cm" enumval=1
+    Distance_Unit_cm,
+
+    //% block="inch" enumval=2
+    Distance_Unit_inch,
+}
+
 //% color=#fd00fd  icon="\uf231" block="PI" blockId="PI"
 namespace PI {
     const board_address = 0x10
@@ -12,17 +23,6 @@ namespace PI {
         BREATH,
         //% block="OFF"
         OFF
-    }
-
-    enum Distance_Unit {
-        //% block="mm" enumval=0
-        Distance_Unit_mm,
-
-        //% block="cm" enumval=1
-        Distance_Unit_cm,
-
-        //% block="inch" enumval=2
-        Distance_Unit_inch,
     }
 
     export enum Boo {
