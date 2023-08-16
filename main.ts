@@ -177,42 +177,20 @@ namespace PI {
     }
 
     //% weight=81
-    //% blockId=sonarbit  block="Ultrasonic distance in unit %distance_unit |at|pin %pin"
-    export function sonarbit_distance(distance_unit: Distance_Unit, pin: DigitalPin): number {
-
-        let old = 0
-        let now = 0
+    //% blockId=sonar_ping block="ping trig %trig|echo %echo"
+    export function ping(trig: DigitalPin, echo: DigitalPin, maxCmDistance = 20): number {
         // send pulse
-        pins.setPull(pin, PinPullMode.PullNone)
-        pins.digitalWritePin(pin, 0)
-        control.waitMicros(2)
-        pins.digitalWritePin(pin, 1)
-        control.waitMicros(10)
-        pins.digitalWritePin(pin, 0)
+        pins.setPull(trig, PinPullMode.PullNone);
+        pins.digitalWritePin(trig, 0);
+        control.waitMicros(2);
+        pins.digitalWritePin(trig, 1);
+        control.waitMicros(10);
+        pins.digitalWritePin(trig, 0);
 
         // read pulse
-        let d = pins.pulseIn(pin, PulseValue.High, 25000)  // 8 / 340 = 
+        const d = pins.pulseIn(echo, PulseValue.High, maxCmDistance * 58);
 
-        let distance = d / 58
-
-        if (distance > 400) {
-            distance = 0
-        }
-
-        switch (distance_unit) {
-            case 0:
-                return Math.floor(distance * 10) //mm
-                break
-            case 1:
-                return Math.floor(distance)  //cm
-                break
-            case 2:
-                return Math.floor(distance / 254)   //inch
-                break
-            default:
-                return 0
-        }
-
+        return Math.idiv(d, 58);
     }
 
     //% weight=80
@@ -261,14 +239,5 @@ namespace PI {
         buf[2] = 0;
         buf[3] = 0;
         pins.i2cWriteBuffer(board_address, buf);
-    }
-
-    //% weight=79
-    //% blockId=autoGrab  block="auto grab set to %boo within distance %distance sensor |at|pin %pin"
-    //% distance.min=0 distance.max=100
-    export function autoGrab(boo: Boo, distance: number, pin: DigitalPin): void{
-        if (sonarbit_distance(Distance_Unit.Distance_Unit_cm, pin) < 10) {
-            setServoAngle(ServoTypeList._180, ServoList.S0, 0)
-        }
     }
 }
